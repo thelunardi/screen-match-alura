@@ -17,4 +17,9 @@ public class Movie extends Title implements Reviewable {
     public int getReviewInStars() {
         return (int) (this.getReview() / 2);
     }
+
+    @Override
+    public String toString() {
+        return "Filme: " + this.getName() + " (" + this.getReleseYear() + ")";
+    }
 }

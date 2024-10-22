@@ -6,6 +6,7 @@ import br.com.alura.screenmatch.model.Episode;
 import br.com.alura.screenmatch.model.Movie;
 import br.com.alura.screenmatch.model.Serie;
 
+import java.util.ArrayList;
 import java.util.logging.Filter;
 
 public class Main {
@@ -16,6 +17,7 @@ public class Main {
 
         movie.setName("Lilo & Stich");
         movie.setDurationInMinutes(140);
+        movie.setReleseYear(2003);
 
         TimeCalculator timeCalculator = new TimeCalculator();
         timeCalculator.include(movie);
@@ -31,6 +33,7 @@ public class Main {
 
         movie2.setName("Lilo & Stich - 2");
         movie2.setDurationInMinutes(110);
+        movie2.setReleseYear(2022);
         timeCalculator.include(movie2);
 
         System.out.println("Nome do filme: " + movie2.getName());
@@ -61,5 +64,13 @@ public class Main {
         timeCalculator.include(serie);
         System.out.println("Total: " + timeCalculator.getTotalTime());
         recommendationFilter.filter(lostEpisode);
+
+        ArrayList<Movie> movies = new ArrayList<>();
+        movies.add(movie);
+        movies.add(movie2);
+
+        System.out.println("Tamanho da lista: " + movies.size());
+        System.out.println("Primeiro filme: " + movies.get(0).getName());
+        System.out.println("Lista de filmes: " + movies);
     }
 }
