@@ -5,6 +5,10 @@ import br.com.alura.screenmatch.calculate.Reviewable;
 public class Movie extends Title implements Reviewable {
     String director;
 
+    public Movie(String name, int releseYear) {
+        super(name, releseYear);
+    }
+
     public String getDirector() {
         return director;
     }

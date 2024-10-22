@@ -9,6 +9,10 @@ public class Serie extends Title implements Reviewable {
     private int episodesPerSeason;
     private int views;
 
+    public Serie(String name, int releseYear) {
+        super(name, releseYear);
+    }
+
     public int getSeasons() {
         return seasons;
     }

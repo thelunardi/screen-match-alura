@@ -9,6 +9,11 @@ public class Title {
     private double reviewSum;
     private int totalReviews;
 
+    public Title(String name, int releseYear) {
+        this.name = name;
+        this.releseYear = releseYear;
+    }
+
     public void evaluate(double value) {
         this.reviewSum += value;
         this.totalReviews++;
@@ -23,16 +28,8 @@ public class Title {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getReleseYear() {
         return releseYear;
-    }
-
-    public void setReleseYear(int releseYear) {
-        this.releseYear = releseYear;
     }
 
     public boolean isIncludedOnPlan() {
