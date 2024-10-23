@@ -7,9 +7,7 @@ import br.com.alura.screenmatch.model.Movie;
 import br.com.alura.screenmatch.model.Serie;
 import br.com.alura.screenmatch.model.Title;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 
 public class MainList {
     public static void main(String[] args) {
@@ -24,7 +22,7 @@ public class MainList {
         movie3.evaluate(9);
         movie3.setDurationInMinutes(120);
 
-        ArrayList<Title> titles = new ArrayList<>();
+        List<Title> titles = new LinkedList<>();
         titles.add(movie);
         titles.add(movie2);
         titles.add(movie3);
