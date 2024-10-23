@@ -9,6 +9,7 @@ import br.com.alura.screenmatch.model.Title;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class MainList {
     public static void main(String[] args) {
@@ -53,6 +54,9 @@ public class MainList {
 
         System.out.println(titles);
         Collections.sort(titles);
+        System.out.println(titles);
+
+        titles.sort(Comparator.comparing(Title::getReleseYear));
         System.out.println(titles);
     }
 }
