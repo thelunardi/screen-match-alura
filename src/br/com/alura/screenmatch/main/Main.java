@@ -7,6 +7,7 @@ import br.com.alura.screenmatch.model.Movie;
 import br.com.alura.screenmatch.model.Serie;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Main {
     public static void main(String[] args) {

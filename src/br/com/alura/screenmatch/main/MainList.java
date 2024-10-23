@@ -8,6 +8,7 @@ import br.com.alura.screenmatch.model.Serie;
 import br.com.alura.screenmatch.model.Title;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainList {
     public static void main(String[] args) {
@@ -39,5 +40,19 @@ public class MainList {
         System.out.println(movie.getDurationInMinutes());
         System.out.println(movie2.getDurationInMinutes());
         System.out.println(movie3.getDurationInMinutes());
+
+        ArrayList<String> actors = new ArrayList<>();
+        actors.add("Brad Pitt");
+        actors.add("Adam Sandler");
+        actors.add("Gal Gadot");
+        actors.add("Angelina Jolie");
+
+        System.out.println(actors);
+        Collections.sort(actors);
+        System.out.println(actors);
+
+        System.out.println(titles);
+        Collections.sort(titles);
+        System.out.println(titles);
     }
 }

@@ -66,4 +66,9 @@ public class Serie extends Title implements Reviewable {
             return 5;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Série: " + this.getName() + " (" + this.getReleseYear() + ")";
+    }
 }
