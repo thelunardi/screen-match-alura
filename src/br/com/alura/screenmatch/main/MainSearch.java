@@ -1,7 +1,10 @@
 package br.com.alura.screenmatch.main;
 
+import br.com.alura.screenmatch.model.OmdbTitle;
 import br.com.alura.screenmatch.model.Title;
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.net.URI;
@@ -36,9 +39,16 @@ public class MainSearch {
                 .send(request, HttpResponse.BodyHandlers.ofString());
 
         System.out.println(response.body());
-        Gson gson = new Gson();
-        Title title = gson.fromJson(response.body(), Title.class);
-        System.out.println("Título: " + title.getName() + " (" + title.getReleseYear() + ")");
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+                .create();
+
+        OmdbTitle omdbTitle = gson.fromJson(response.body(), OmdbTitle.class);
+        System.out.println("Título: " + omdbTitle.title() + " (" + omdbTitle.year() + ")");
+
+        Title title = new Title(omdbTitle);
+        System.out.println("Título: " + title.getName() + " (" + title.getReleseYear() + ") - " + title.getDurationInMinutes() + " minutos");
+
         //        client.sendAsync(request, BodyHandlers.ofString())
 //                .thenApply(HttpResponse::body)
 //                .thenAccept(System.out::println)

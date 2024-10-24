@@ -20,6 +20,12 @@ public class Title implements Comparable<Title> {
         this.releseYear = releseYear;
     }
 
+    public Title(OmdbTitle omdbTitle) {
+        this.name = omdbTitle.title();
+        this.releseYear = Integer.parseInt(omdbTitle.year());
+        this.durationInMinutes = Integer.parseInt(omdbTitle.runtime().substring(0, omdbTitle.runtime().length() - 4));
+    }
+
     public void evaluate(double value) {
         this.reviewSum += value;
         this.totalReviews++;
