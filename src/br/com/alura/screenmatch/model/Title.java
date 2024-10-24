@@ -1,7 +1,13 @@
 package br.com.alura.screenmatch.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serial;
+
 public class Title implements Comparable<Title> {
+    @SerializedName("Title")
     private String name;
+    @SerializedName("Year")
     private int releseYear;
     private boolean includedOnPlan;
     private int durationInMinutes;
