@@ -1,5 +1,6 @@
 package br.com.alura.screenmatch.main;
 
+import br.com.alura.screenmatch.exception.YearConversionException;
 import br.com.alura.screenmatch.model.OmdbTitle;
 import br.com.alura.screenmatch.model.Title;
 import com.google.gson.FieldNamingPolicy;
@@ -13,6 +14,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Year;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -29,25 +31,37 @@ public class MainSearch {
         }
         var apiKey = props.get("API_KEY");
 
-        String address = "https://www.omdbapi.com/?t=" + filter + "&apikey=" + apiKey.toString();
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(address))
-                .build();
+        String address = "https://www.omdbapi.com/?t=" + filter.replace(" ", "+") + "&apikey=" + apiKey.toString();
 
-        HttpResponse<String> response = client
-                .send(request, HttpResponse.BodyHandlers.ofString());
+        try {
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(address))
+                    .build();
 
-        System.out.println(response.body());
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
-                .create();
+            HttpResponse<String> response = client
+                    .send(request, HttpResponse.BodyHandlers.ofString());
 
-        OmdbTitle omdbTitle = gson.fromJson(response.body(), OmdbTitle.class);
-        System.out.println("Título: " + omdbTitle.title() + " (" + omdbTitle.year() + ")");
+            System.out.println(response.body());
+            Gson gson = new GsonBuilder()
+                    .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+                    .create();
 
-        Title title = new Title(omdbTitle);
-        System.out.println("Título: " + title.getName() + " (" + title.getReleseYear() + ") - " + title.getDurationInMinutes() + " minutos");
+            OmdbTitle omdbTitle = gson.fromJson(response.body(), OmdbTitle.class);
+            System.out.println("Título: " + omdbTitle.title() + " (" + omdbTitle.year() + ")");
+
+            // try {
+            Title title = new Title(omdbTitle);
+            System.out.println("Título: " + title.getName() + " (" + title.getReleseYear() + ") - " + title.getDurationInMinutes() + " minutos");
+        } catch (NumberFormatException e) {
+            System.out.println("Aconteceu um erro");
+            System.out.println(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro de argumento na busca");
+        } catch (YearConversionException e) {
+            System.out.println(e.getMessage());
+        }
+
 
         //        client.sendAsync(request, BodyHandlers.ofString())
 //                .thenApply(HttpResponse::body)

@@ -1,13 +1,12 @@
 package br.com.alura.screenmatch.model;
 
+import br.com.alura.screenmatch.exception.YearConversionException;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serial;
 
 public class Title implements Comparable<Title> {
-    @SerializedName("Title")
     private String name;
-    @SerializedName("Year")
     private int releseYear;
     private boolean includedOnPlan;
     private int durationInMinutes;
@@ -22,6 +21,9 @@ public class Title implements Comparable<Title> {
 
     public Title(OmdbTitle omdbTitle) {
         this.name = omdbTitle.title();
+        if (omdbTitle.title().length() > 4) {
+            throw new YearConversionException("Erro ao converter o ano porque tem mais de 4 caracteres");
+        }
         this.releseYear = Integer.parseInt(omdbTitle.year());
         this.durationInMinutes = Integer.parseInt(omdbTitle.runtime().substring(0, omdbTitle.runtime().length() - 4));
     }
