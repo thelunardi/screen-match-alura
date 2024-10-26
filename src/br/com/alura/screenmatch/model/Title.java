@@ -21,8 +21,8 @@ public class Title implements Comparable<Title> {
 
     public Title(OmdbTitle omdbTitle) {
         this.name = omdbTitle.title();
-        if (omdbTitle.title().length() > 4) {
-            throw new YearConversionException("Erro ao converter o ano porque tem mais de 4 caracteres");
+        if (omdbTitle.year().length() > 4) {
+            throw new YearConversionException("Erro ao converter o ano porque tem mais de 4 caracteres " + omdbTitle.title().length());
         }
         this.releseYear = Integer.parseInt(omdbTitle.year());
         this.durationInMinutes = Integer.parseInt(omdbTitle.runtime().substring(0, omdbTitle.runtime().length() - 4));
@@ -69,5 +69,10 @@ public class Title implements Comparable<Title> {
     @Override
     public int compareTo(Title t) {
         return this.getName().compareTo(t.getName());
+    }
+
+    @Override
+    public String toString() {
+        return "Título: " + this.getName() + "(" + this.getReleseYear() + ") - " + this.getDurationInMinutes() + " minutos";
     }
 }
